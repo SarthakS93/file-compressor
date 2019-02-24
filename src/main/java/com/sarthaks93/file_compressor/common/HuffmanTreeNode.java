@@ -63,4 +63,24 @@ public class HuffmanTreeNode implements Comparable<HuffmanTreeNode> {
 		return this.frequency - node.getFrequency();
 	}
 
+	// toString method
+	
+	@Override
+	public String toString() {
+		return "HuffmanTreeNode [frequency=" + frequency + ", data=" + data + ", left=" + left + ", right=" + right
+				+ "]";
+	}
+	
+	// utility methods
+	
+	// check if left child is empty
+	public boolean isLeftEmpty() {
+		return this.left == null;
+	}
+	
+	// check if right child is empty
+	public boolean isRightEmpty() {
+		return this.right == null;
+	}
+
 }
