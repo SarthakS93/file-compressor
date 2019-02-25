@@ -1,5 +1,8 @@
 package com.sarthaks93.file_compressor.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.BitSet;
@@ -59,7 +62,25 @@ public class IOUtils {
 	private static String generateFileName() {
 		Date d = new Date();
 		String fileName = Long.toString(d.getTime()) + ".sar";
-		return fileName;
+		return "abc.sar";
+	}
+	
+	public static byte[] readBytesFromFile(String fileName) {
+		File file = new File(fileName);
+		// initialize array with file length
+		byte[] bytesArray = new byte[(int) file.length()]; 
+		
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream(file);
+			//read file into bytes[]
+			fis.read(bytesArray);
+			fis.close();
+		} catch (Exception ex) {
+			System.out.println(ex.toString());
+		}
+					
+		return bytesArray;
 	}
 
 }
