@@ -18,7 +18,7 @@ import com.sarthaks93.file_compressor.utils.IOUtils;
  * @date 21-Feb-2019
  */
 
-public class HuffmanCoding implements Compressor {
+public class HuffmanCodingCompressor implements Compressor {
 
 	@Override
 	public void compress(String text) {
