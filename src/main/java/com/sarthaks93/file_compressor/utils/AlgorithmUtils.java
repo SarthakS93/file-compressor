@@ -1,5 +1,6 @@
 package com.sarthaks93.file_compressor.utils;
 
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +22,37 @@ public class AlgorithmUtils {
 		}
 		
 		return frequencyMap;
+	}
+	
+	public static BitSet createBitArray(String text, Map<String, String> prefixMap) {
+		// create a bit array
+		BitSet bitArray = new BitSet();
+		int startIndex = 0, endIndex = 0, bitArrayIndex = 0;
+
+		// loop over text
+		while (endIndex < text.length()) {
+			
+			// get current substring
+			String prefix = text.substring(startIndex, endIndex + 1);
+			String prefixCode = prefixMap.get(prefix);
+			
+			// prefix found
+			if (prefixCode != null) {
+				// append prefix code in code
+				IOUtils.encodeBitArray(bitArray, prefixCode, bitArrayIndex);
+				bitArrayIndex += prefixCode.length();
+				startIndex = endIndex + 1;
+			}
+			// prefix not found in prefix map
+			else {
+				System.out.println(prefix + " not found in prefix map");
+			}
+			
+			//  increment loop iterator
+			endIndex++;
+		}
+		
+		return bitArray;
 	}
 
 }
