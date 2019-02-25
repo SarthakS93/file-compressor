@@ -1,19 +1,15 @@
 package com.sarthaks93.file_compressor.compressor.service;
 
+import java.util.BitSet;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.PriorityQueue;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.sarthaks93.file_compressor.common.HuffmanTreeNode;
 import com.sarthaks93.file_compressor.compressor.Compressor;
 import com.sarthaks93.file_compressor.utils.AlgorithmUtils;
-import com.sarthaks93.file_compressor.utils.Constants;
-import com.sarthaks93.file_compressor.utils.Pair;
+import com.sarthaks93.file_compressor.utils.IOUtils;
 
 /**
  * 
@@ -23,8 +19,6 @@ import com.sarthaks93.file_compressor.utils.Pair;
  */
 
 public class HuffmanCoding implements Compressor {
-	
-//	Logger log = LoggerFactory.getLogger(HuffmanCoding.class);
 
 	@Override
 	public void compress(String text) {
@@ -33,6 +27,10 @@ public class HuffmanCoding implements Compressor {
 		HuffmanTreeNode root = buildHuffmanTree(text);
 		
 		Map<String, String> prefixMap = createPrefixMap(root);
+		
+		BitSet bitArray = AlgorithmUtils.createBitArray(text, prefixMap);
+		
+		writeDataToFile(bitArray);
 		
 		
 	}
@@ -116,5 +114,10 @@ public class HuffmanCoding implements Compressor {
 		prefix.deleteCharAt(prefix.length() - 1);	
 	}
 
+	private void writeDataToFile(BitSet bitArray) {
+		byte[] bytes = bitArray.toByteArray();
+		String fileName = IOUtils.writeBytesToFile(bytes);
+		System.out.println("Writen to file " + fileName);
+	}
 
 }
