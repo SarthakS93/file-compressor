@@ -9,6 +9,6 @@ package com.sarthaks93.file_compressor.decompress;
 
 public interface Decompressor {
 	
-	public String decompress(byte[] bytes);
+	public void decompress(String fileName);
 
 }

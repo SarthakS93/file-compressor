@@ -5,11 +5,11 @@ import com.sarthaks93.file_compressor.decompress.Decompressor;
 public class HuffmanCodingDecompressor implements Decompressor {
 
 	@Override
-	public String decompress(byte[] bytes) {
+	public void decompress(String fileName) {
 		
 		
 		
-		return null;
+		
 	}
 	
 	
