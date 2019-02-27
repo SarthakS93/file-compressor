@@ -19,6 +19,8 @@ import com.sarthaks93.file_compressor.utils.IOUtils;
  */
 
 public class HuffmanCodingCompressor implements Compressor {
+	
+	public static Map<String, String> myMap;
 
 	@Override
 	public void compress(String text) {
@@ -27,9 +29,10 @@ public class HuffmanCodingCompressor implements Compressor {
 		HuffmanTreeNode root = buildHuffmanTree(text);
 		
 		Map<String, String> prefixMap = createPrefixMap(root);
+		myMap = prefixMap;
 		
 		BitSet bitArray = AlgorithmUtils.createBitArray(text, prefixMap);
-		
+
 		writeDataToFile(bitArray);
 		
 		

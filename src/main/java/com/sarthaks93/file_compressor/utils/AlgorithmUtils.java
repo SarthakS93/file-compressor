@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class AlgorithmUtils {
 	
+	public static int arrayIndex = 0;
+	
 	public static Map<String, Integer> getFrequencyMap(String text) {
 		Map<String, Integer> frequencyMap = new HashMap<String, Integer>();
 		
@@ -51,6 +53,8 @@ public class AlgorithmUtils {
 			//  increment loop iterator
 			endIndex++;
 		}
+		
+		arrayIndex = bitArrayIndex;
 		
 		return bitArray;
 	}

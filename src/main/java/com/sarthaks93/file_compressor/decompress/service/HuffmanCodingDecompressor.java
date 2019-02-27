@@ -62,6 +62,11 @@ public class HuffmanCodingDecompressor implements Decompressor {
 			endIndex++;
 		}
 		
+		if (code != "") {
+			System.out.println("Trailing code not blank");
+		}
+		
+		System.out.println(text);
 		
 		return text;
 	}
