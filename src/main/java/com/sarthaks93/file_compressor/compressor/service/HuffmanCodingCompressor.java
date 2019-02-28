@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.PriorityQueue;
+
+import com.sarthaks93.file_compressor.common.HuffmanBytesData;
 import com.sarthaks93.file_compressor.common.HuffmanTreeNode;
 import com.sarthaks93.file_compressor.compressor.Compressor;
 import com.sarthaks93.file_compressor.utils.AlgorithmUtils;
@@ -20,7 +22,6 @@ import com.sarthaks93.file_compressor.utils.IOUtils;
 
 public class HuffmanCodingCompressor implements Compressor {
 	
-	public static Map<String, String> myMap;
 
 	@Override
 	public void compress(String text) {
@@ -29,13 +30,13 @@ public class HuffmanCodingCompressor implements Compressor {
 		HuffmanTreeNode root = buildHuffmanTree(text);
 		
 		Map<String, String> prefixMap = createPrefixMap(root);
-		myMap = prefixMap;
 		
-		BitSet bitArray = AlgorithmUtils.createBitArray(text, prefixMap);
-
-		writeDataToFile(bitArray);
+		HuffmanBytesData huffmanData = AlgorithmUtils.createBitArray(text, prefixMap);
 		
-		
+		huffmanData.setCharactersCount(prefixMap.size());
+		huffmanData.setPrefixMap(prefixMap);
+			
+		IOUtils.writeHuffmanDataToFile(huffmanData);
 	}
 	
 	// build the Huffman Tree

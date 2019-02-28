@@ -4,9 +4,10 @@ import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.sarthaks93.file_compressor.common.HuffmanBytesData;
+
 public class AlgorithmUtils {
 	
-	public static int arrayIndex = 0;
 	
 	public static Map<String, Integer> getFrequencyMap(String text) {
 		Map<String, Integer> frequencyMap = new HashMap<String, Integer>();
@@ -26,7 +27,7 @@ public class AlgorithmUtils {
 		return frequencyMap;
 	}
 	
-	public static BitSet createBitArray(String text, Map<String, String> prefixMap) {
+	public static HuffmanBytesData createBitArray(String text, Map<String, String> prefixMap) {
 		// create a bit array
 		BitSet bitArray = new BitSet();
 		int startIndex = 0, endIndex = 0, bitArrayIndex = 0;
@@ -54,9 +55,11 @@ public class AlgorithmUtils {
 			endIndex++;
 		}
 		
-		arrayIndex = bitArrayIndex;
+		HuffmanBytesData huffmanData = new HuffmanBytesData();
+		huffmanData.setHuffmanData(bitArray);
+		huffmanData.setHuffmanDataLength(bitArrayIndex);
 		
-		return bitArray;
+		return huffmanData;
 	}
 
 }
