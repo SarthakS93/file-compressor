@@ -30,6 +30,8 @@ public class HuffmanBytesData implements Serializable {
 	
 	private Map<String, String> prefixMap;
 	
+	private String fileName;
+	
 	
 	// constructor methods
 	
@@ -84,6 +86,14 @@ public class HuffmanBytesData implements Serializable {
 
 	public void setPrefixMap(Map<String, String> prefixMap) {
 		this.prefixMap = prefixMap;
+	}
+	
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	

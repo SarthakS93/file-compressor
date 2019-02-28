@@ -24,8 +24,10 @@ public class HuffmanCodingCompressor implements Compressor {
 	
 
 	@Override
-	public void compress(String text) {
-		System.out.println(text);
+	public void compress(String fileName) {
+		System.out.println(fileName);
+		
+		String text = IOUtils.readStringFromFile(fileName);
 		
 		HuffmanTreeNode root = buildHuffmanTree(text);
 		
@@ -35,6 +37,7 @@ public class HuffmanCodingCompressor implements Compressor {
 		
 		huffmanData.setCharactersCount(prefixMap.size());
 		huffmanData.setPrefixMap(prefixMap);
+		huffmanData.setFileName(fileName);
 			
 		IOUtils.writeHuffmanDataToFile(huffmanData);
 	}

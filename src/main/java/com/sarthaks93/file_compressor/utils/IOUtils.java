@@ -1,9 +1,11 @@
 package com.sarthaks93.file_compressor.utils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -117,5 +119,37 @@ public class IOUtils {
 		}
 		return null;
 	}
+	
+	public static String readStringFromFile(String fileName) {
+		String text = "";
+		try {
+			File file = new File(fileName);
+			FileInputStream fis = new FileInputStream(file);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader br = new BufferedReader(isr);
+
+			String line;
+			int ctr = 0;
+			while((line = br.readLine()) != null){
+				
+			     //process the line
+//			     System.out.println(line);
+				text += line + "\n";
+			    ctr++;
+			}
+			System.out.println(ctr);
+			if (text.charAt(text.length() - 1) == '\n') {
+				text = text.substring(0, text.length() - 1);
+			} 
+			br.close();
+		} catch (Exception ex) {
+			System.out.println(ex.toString());
+		}
+		
+		System.out.println(text);
+		
+		return text;
+	}
+	
 
 }
