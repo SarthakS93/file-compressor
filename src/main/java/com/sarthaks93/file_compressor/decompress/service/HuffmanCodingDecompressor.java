@@ -4,6 +4,7 @@ import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.sarthaks93.file_compressor.common.HuffmanBytesData;
 import com.sarthaks93.file_compressor.compressor.service.HuffmanCodingCompressor;
 import com.sarthaks93.file_compressor.decompress.Decompressor;
 import com.sarthaks93.file_compressor.utils.AlgorithmUtils;
@@ -15,36 +16,31 @@ public class HuffmanCodingDecompressor implements Decompressor {
 	public void decompress(String fileName) {
 		System.out.println("Decompress " + fileName);
 		
-		byte[] bytes = IOUtils.readBytesFromFile(fileName);
-		System.out.println(bytes);
+		HuffmanBytesData huffmanData = IOUtils.readHuffmanDataFromFile(fileName);
 		
-		BitSet bitArray = BitSet.valueOf(bytes);
-		
-		Map<String, String> prefixMap = HuffmanCodingCompressor.myMap;
-		
-		String text = getTextFromBitArray(bitArray, prefixMap);
+		String text = getTextFromBitArray(huffmanData);
 		
 	}
 	
 	
-	private String getTextFromBitArray(BitSet bitArray, Map<String, String> prefixMap) {
+	private String getTextFromBitArray(HuffmanBytesData huffmanData) {
 		String text = "";
 		
 		Map<String, String> prefixMapReverse = new HashMap<String, String>();
-		for (Map.Entry<String, String> entry : prefixMap.entrySet()) {
+		for (Map.Entry<String, String> entry : huffmanData.getPrefixMap().entrySet()) {
 			prefixMapReverse.put(entry.getValue(), entry.getKey());
 		}
 		
-		System.out.println(bitArray.size());
+		System.out.println(huffmanData.getHuffmanData().size());
 		
-		int n = AlgorithmUtils.arrayIndex;
+		int n = huffmanData.getHuffmanDataLength();
 		
 		String code = "";
 		
 		int startIndex = 0, endIndex = 0;
 		
 		while (endIndex < n) {
-			if (bitArray.get(endIndex)) {
+			if (huffmanData.getHuffmanData().get(endIndex)) {
 				code += "1";
 			}
 			else {
