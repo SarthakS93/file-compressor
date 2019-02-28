@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.BitSet;
 import java.util.Date;
+
+import com.sarthaks93.file_compressor.common.HuffmanBytesData;
 
 /**
  * 
@@ -81,6 +84,21 @@ public class IOUtils {
 		}
 					
 		return bytesArray;
+	}
+	
+	public static void writeHuffmanDataToFile(HuffmanBytesData huffmanData) {
+		try {
+			FileOutputStream fos = new FileOutputStream("abc.sar");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			// write object to file
+			oos.writeObject(huffmanData);
+			System.out.println("Done");
+			// closing resources
+			oos.close();
+			fos.close();
+		} catch (Exception ex) {
+			System.out.println(ex.toString());
+		}
 	}
 
 }
