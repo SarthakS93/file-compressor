@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.BitSet;
@@ -99,6 +100,22 @@ public class IOUtils {
 		} catch (Exception ex) {
 			System.out.println(ex.toString());
 		}
+	}
+	
+	public static HuffmanBytesData readHuffmanDataFromFile(String fileName) {
+		try {
+			FileInputStream is = new FileInputStream(fileName);
+			ObjectInputStream ois = new ObjectInputStream(is);
+			HuffmanBytesData huffmanData = (HuffmanBytesData) ois.readObject();
+
+			ois.close();
+			is.close();
+			
+			return huffmanData;
+		} catch (Exception ex) {
+			System.out.println(ex.toString());
+		}
+		return null;
 	}
 
 }
